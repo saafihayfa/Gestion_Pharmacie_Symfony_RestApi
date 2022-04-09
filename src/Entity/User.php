@@ -9,9 +9,18 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ApiResource]
+
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+    collectionOperations: ['get','post',],
+    itemOperations: ['get','delete'],
+          
+)] 
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -20,15 +29,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups(["read", "write"])]
     private $username;
 
     #[ORM\Column(type: 'json')]
+    #[Groups(["read"])]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
+    #[Groups([ "write"])]
     private $password;
 
     #[ORM\Column(type: 'string', length: 20)]
+    #[Groups(["read", "write"])]
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Medicaments::class)]

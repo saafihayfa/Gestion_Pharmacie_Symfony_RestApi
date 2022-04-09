@@ -29,10 +29,10 @@ class Commandes
     #[ORM\Column(type: 'date')]
     private $date_commande;
 
-    #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'commandes')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'commandes')]
     private $user_id;
 
-    #[ORM\ManyToMany(targetEntity: fournisseurs::class, inversedBy: 'commandes')]
+    #[ORM\ManyToMany(targetEntity: Fournisseurs::class, inversedBy: 'commandes')]
     private $fournisseur_id;
 
     public function __construct()

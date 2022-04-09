@@ -23,7 +23,7 @@ class Medicaments
     #[ORM\Column(type: 'string', length: 255)]
     private $libellé;
 
-    #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'medicaments')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'medicaments')]
     #[ORM\JoinColumn(nullable: false)]
     private $user_id;
 

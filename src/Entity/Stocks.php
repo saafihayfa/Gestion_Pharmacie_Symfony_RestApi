@@ -29,11 +29,11 @@ class Stocks
     #[ORM\Column(type: 'string', length: 20)]
     private $etat;
 
-    #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'stocks')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'stocks')]
     #[ORM\JoinColumn(nullable: false)]
     private $user_id;
 
-    #[ORM\OneToMany(mappedBy: 'stocks', targetEntity: medicaments::class)]
+    #[ORM\OneToMany(mappedBy: 'stocks', targetEntity: Medicaments::class)]
     private $médicament_id;
 
     public function __construct()

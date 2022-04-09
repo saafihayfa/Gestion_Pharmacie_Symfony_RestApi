@@ -24,7 +24,7 @@ class Ventes
     #[ORM\Column(type: 'integer')]
     private $prix;
 
-    #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'ventes')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'ventes')]
     #[ORM\JoinColumn(nullable: false)]
     private $user_id;
 
