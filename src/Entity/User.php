@@ -44,8 +44,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(["read", "write"])]
     private $name;
 
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Medicaments::class)]
-    private $medicaments;
 
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Stocks::class)]
     private $stocks;
@@ -58,7 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->medicaments = new ArrayCollection();
+        
         $this->stocks = new ArrayCollection();
         $this->ventes = new ArrayCollection();
         $this->commandes = new ArrayCollection();
@@ -146,35 +144,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Medicaments>
-     */
-    public function getMedicaments(): Collection
-    {
-        return $this->medicaments;
-    }
-
-    public function addMedicament(Medicaments $medicament): self
-    {
-        if (!$this->medicaments->contains($medicament)) {
-            $this->medicaments[] = $medicament;
-            $medicament->setUserId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMedicament(Medicaments $medicament): self
-    {
-        if ($this->medicaments->removeElement($medicament)) {
-            // set the owning side to null (unless already changed)
-            if ($medicament->getUserId() === $this) {
-                $medicament->setUserId(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, Stocks>

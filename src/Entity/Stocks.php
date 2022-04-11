@@ -33,8 +33,6 @@ class Stocks
     #[ORM\JoinColumn(nullable: false)]
     private $user_id;
 
-    #[ORM\OneToMany(mappedBy: 'stocks', targetEntity: Medicaments::class)]
-    private $médicament_id;
 
     public function __construct()
     {
@@ -106,33 +104,4 @@ class Stocks
         return $this;
     }
 
-    /**
-     * @return Collection<int, medicaments>
-     */
-    public function getMédicamentId(): Collection
-    {
-        return $this->médicament_id;
-    }
-
-    public function addMDicamentId(medicaments $mDicamentId): self
-    {
-        if (!$this->médicament_id->contains($mDicamentId)) {
-            $this->médicament_id[] = $mDicamentId;
-            $mDicamentId->setStocks($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMDicamentId(medicaments $mDicamentId): self
-    {
-        if ($this->médicament_id->removeElement($mDicamentId)) {
-            // set the owning side to null (unless already changed)
-            if ($mDicamentId->getStocks() === $this) {
-                $mDicamentId->setStocks(null);
-            }
-        }
-
-        return $this;
-    }
 }

@@ -18,20 +18,12 @@ class Medicaments
     #[ORM\Column(type: 'string', length: 20)]
     private $nom;
 
-   
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $libellé;
-
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'medicaments')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $user_id;
-
     #[ORM\Column(type: 'integer')]
     private $prix;
 
-    #[ORM\ManyToOne(targetEntity: Stocks::class, inversedBy: 'médicament_id')]
-    private $stocks;
+    #[ORM\Column(type: 'string', length: 255)]
+    private $libelle;
+
 
     public function getId(): ?int
     {
@@ -51,31 +43,6 @@ class Medicaments
     }
 
    
-
-    public function getLibellé(): ?string
-    {
-        return $this->libellé;
-    }
-
-    public function setLibellé(string $libellé): self
-    {
-        $this->libellé = $libellé;
-
-        return $this;
-    }
-
-    public function getUserId(): ?user
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(?user $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
-
     public function getPrix(): ?int
     {
         return $this->prix;
@@ -88,15 +55,17 @@ class Medicaments
         return $this;
     }
 
-    public function getStocks(): ?Stocks
+    public function getLibelle(): ?string
     {
-        return $this->stocks;
+        return $this->libelle;
     }
 
-    public function setStocks(?Stocks $stocks): self
+    public function setLibelle(string $libelle): self
     {
-        $this->stocks = $stocks;
+        $this->libelle = $libelle;
 
         return $this;
     }
+
+    
 }
