@@ -44,6 +44,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(["read", "write"])]
     private $name;
 
+    #[ORM\Column(type: 'text')]
+    #[Groups(["read", "write"])]
+    private $email;
+
 
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Stocks::class)]
     private $stocks;
@@ -132,20 +136,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     
-
     /**
      * @return Collection<int, Stocks>
      */
@@ -235,4 +226,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+   
 }
