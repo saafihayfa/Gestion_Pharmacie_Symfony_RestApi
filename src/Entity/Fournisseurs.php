@@ -26,14 +26,7 @@ class Fournisseurs
     #[ORM\Column(type: 'integer')]
     private $telephone;
 
-    #[ORM\ManyToMany(targetEntity: Commandes::class, mappedBy: 'fournisseur_id')]
-    private $commandes;
-
-    public function __construct()
-    {
-        $this->commandes = new ArrayCollection();
-    }
-
+  
     public function getId(): ?int
     {
         return $this->id;
@@ -75,30 +68,5 @@ class Fournisseurs
         return $this;
     }
 
-    /**
-     * @return Collection<int, Commandes>
-     */
-    public function getCommandes(): Collection
-    {
-        return $this->commandes;
-    }
-
-    public function addCommande(Commandes $commande): self
-    {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes[] = $commande;
-            $commande->addFournisseurId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommande(Commandes $commande): self
-    {
-        if ($this->commandes->removeElement($commande)) {
-            $commande->removeFournisseurId($this);
-        }
-
-        return $this;
-    }
+   
 }

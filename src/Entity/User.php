@@ -49,23 +49,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
 
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Stocks::class)]
-    private $stocks;
-
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Ventes::class)]
-    private $ventes;
-
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Commandes::class)]
-    private $commandes;
-
-    public function __construct()
-    {
-        
-        $this->stocks = new ArrayCollection();
-        $this->ventes = new ArrayCollection();
-        $this->commandes = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -134,97 +117,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    
-    /**
-     * @return Collection<int, Stocks>
-     */
-    public function getStocks(): Collection
-    {
-        return $this->stocks;
-    }
-
-    public function addStock(Stocks $stock): self
-    {
-        if (!$this->stocks->contains($stock)) {
-            $this->stocks[] = $stock;
-            $stock->setUserId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStock(Stocks $stock): self
-    {
-        if ($this->stocks->removeElement($stock)) {
-            // set the owning side to null (unless already changed)
-            if ($stock->getUserId() === $this) {
-                $stock->setUserId(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Ventes>
-     */
-    public function getVentes(): Collection
-    {
-        return $this->ventes;
-    }
-
-    public function addVente(Ventes $vente): self
-    {
-        if (!$this->ventes->contains($vente)) {
-            $this->ventes[] = $vente;
-            $vente->setUserId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVente(Ventes $vente): self
-    {
-        if ($this->ventes->removeElement($vente)) {
-            // set the owning side to null (unless already changed)
-            if ($vente->getUserId() === $this) {
-                $vente->setUserId(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Commandes>
-     */
-    public function getCommandes(): Collection
-    {
-        return $this->commandes;
-    }
-
-    public function addCommande(Commandes $commande): self
-    {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes[] = $commande;
-            $commande->setUserId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommande(Commandes $commande): self
-    {
-        if ($this->commandes->removeElement($commande)) {
-            // set the owning side to null (unless already changed)
-            if ($commande->getUserId() === $this) {
-                $commande->setUserId(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getName(): ?string

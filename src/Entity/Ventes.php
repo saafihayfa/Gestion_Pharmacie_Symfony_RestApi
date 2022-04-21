@@ -16,43 +16,40 @@ class Ventes
     private $id;
 
     #[ORM\Column(type: 'string', length: 30)]
-    private $nom_médicament;
+    private $nom;
 
     #[ORM\Column(type: 'integer')]
-    private $quantité;
+    private $quantite;
 
     #[ORM\Column(type: 'integer')]
     private $prix;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'ventes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $user_id;
-
+   
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNomMédicament(): ?string
+    public function getNom(): ?string
     {
-        return $this->nom_médicament;
+        return $this->nom;
     }
 
-    public function setNomMédicament(string $nom_médicament): self
+    public function setNom(string $nom): self
     {
-        $this->nom_médicament = $nom_médicament;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getQuantité(): ?int
+    public function getQuantite(): ?int
     {
-        return $this->quantité;
+        return $this->quantite;
     }
 
-    public function setQuantité(int $quantité): self
+    public function setQuantite(int $quantite): self
     {
-        $this->quantité = $quantité;
+        $this->quantite = $quantite;
 
         return $this;
     }
@@ -69,15 +66,5 @@ class Ventes
         return $this;
     }
 
-    public function getUserId(): ?user
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(?user $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
+    
 }

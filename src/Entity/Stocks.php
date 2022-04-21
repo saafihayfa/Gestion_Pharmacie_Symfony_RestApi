@@ -21,23 +21,13 @@ class Stocks
     private $nom;
 
     #[ORM\Column(type: 'integer')]
-    private $entrée;
+    private $entree;
 
     #[ORM\Column(type: 'integer')]
     private $sortie;
 
     #[ORM\Column(type: 'string', length: 20)]
     private $etat;
-
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'stocks')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $user_id;
-
-
-    public function __construct()
-    {
-        $this->médicament_id = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -56,14 +46,14 @@ class Stocks
         return $this;
     }
 
-    public function getEntrée(): ?int
+    public function getEntree(): ?int
     {
-        return $this->entrée;
+        return $this->entree;
     }
 
-    public function setEntrée(int $entrée): self
+    public function setEntree(int $entree): self
     {
-        $this->entrée = $entrée;
+        $this->entree = $entree;
 
         return $this;
     }
@@ -92,16 +82,6 @@ class Stocks
         return $this;
     }
 
-    public function getUserId(): ?user
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(?user $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
+    
 
 }
