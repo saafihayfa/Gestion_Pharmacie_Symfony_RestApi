@@ -24,7 +24,9 @@ class Ventes
     #[ORM\Column(type: 'integer')]
     private $prix;
 
-   
+    #[ORM\Column(type: 'date')]
+    private $date_vente;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -62,6 +64,18 @@ class Ventes
     public function setPrix(int $prix): self
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getDateVente(): ?\DateTimeInterface
+    {
+        return $this->date_vente;
+    }
+
+    public function setDateVente(\DateTimeInterface $date_vente): self
+    {
+        $this->date_vente = $date_vente;
 
         return $this;
     }
