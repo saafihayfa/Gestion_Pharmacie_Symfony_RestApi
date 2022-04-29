@@ -26,6 +26,9 @@ class Fournisseurs
     #[ORM\Column(type: 'integer')]
     private $telephone;
 
+    #[ORM\Column(type: 'string', length: 20)]
+    private $prenom;
+
   
     public function getId(): ?int
     {
@@ -64,6 +67,18 @@ class Fournisseurs
     public function setTelephone(int $telephone): self
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
 
         return $this;
     }
